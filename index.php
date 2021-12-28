@@ -78,6 +78,15 @@ if($num>0){
         }
   
     echo "</table>";
+
+    // the page where this paging is used
+    $page_url = "index.php?";
+    
+    // count all products in the database to calculate total pages
+    $total_rows = $product->countAll();
+    
+    // paging buttons here
+    include_once 'paging.php';
   
     // paging buttons will be here
 }
