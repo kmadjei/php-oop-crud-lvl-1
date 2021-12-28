@@ -22,7 +22,28 @@ echo "<div class='right-button-margin'>
     </div>";
   
 ?>
-<!-- PHP post code will be here -->
+
+<?php 
+// if the form was submitted - PHP OOP CRUD Tutorial
+if($_POST){
+  
+    // set product property values
+    $product->name = $_POST['name'];
+    $product->price = $_POST['price'];
+    $product->description = $_POST['description'];
+    $product->category_id = $_POST['category_id'];
+  
+    // create the product
+    if($product->create()){
+        echo "<div class='alert alert-success'>Product was created.</div>";
+    }
+  
+    // if unable to create the product, tell the user
+    else{
+        echo "<div class='alert alert-danger'>Unable to create product.</div>";
+    }
+}
+?>
   
 <!-- HTML form for creating a product -->
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
