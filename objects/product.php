@@ -12,6 +12,7 @@ class Product{
     public $description;
     public $category_id;
     public $timestamp;
+    public $image;
   
     public function __construct($db){
         $this->conn = $db;
@@ -20,12 +21,11 @@ class Product{
     // create product
     function create(){
   
-        //write query
-        $query = "INSERT INTO
-                    " . $this->table_name . "
-                SET
-                    name=:name, price=:price, description=:description, category_id=:category_id, created=:created";
-  
+        // insert query
+        $query = "INSERT INTO " . $this->table_name . "
+        SET name=:name, price=:price, description=:description,
+            category_id=:category_id, image=:image, created=:created";
+
         $stmt = $this->conn->prepare($query);
   
         // posted values
@@ -33,6 +33,7 @@ class Product{
         $this->price=htmlspecialchars(strip_tags($this->price));
         $this->description=htmlspecialchars(strip_tags($this->description));
         $this->category_id=htmlspecialchars(strip_tags($this->category_id));
+        $this->image=htmlspecialchars(strip_tags($this->image));
   
         // to get time-stamp for 'created' field
         $this->timestamp = date('Y-m-d H:i:s');
@@ -43,6 +44,7 @@ class Product{
         $stmt->bindParam(":description", $this->description);
         $stmt->bindParam(":category_id", $this->category_id);
         $stmt->bindParam(":created", $this->timestamp);
+        $stmt->bindParam(":image", $this->image);
   
         if($stmt->execute()){
             return true;
