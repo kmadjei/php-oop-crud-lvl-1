@@ -89,7 +89,7 @@ if($num>0){
     include_once 'paging.php';
   
     // paging buttons will be here
-}
+} 
   
 // tell the user there are no products
 else{
